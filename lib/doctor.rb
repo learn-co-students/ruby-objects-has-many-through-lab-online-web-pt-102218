@@ -5,8 +5,6 @@ class Doctor
   
   def initialize(name)
     @name = name 
-    @appointments = []
-    @patients = []
     @@all << self
   end 
   
@@ -16,16 +14,19 @@ class Doctor
   
   def new_appointment(patient, date)
     appointment = Appointment.new(patient, self, date)
-    @patients << patient
-    @appointments << appointment
   end 
   
   def appointments
-    @appointments
+    Appointment.all.select{|appointment| appointment.doctor == self}
   end 
   
   def patients
-    @patients
+    appo = Appointment.all.select{|appointment| appointment.doctor == self}
+    patientsList = []
+    appo.each do |appointment|
+      patientsList << appointment.patient
+    end 
+    patientsList
   end 
 
 end 
