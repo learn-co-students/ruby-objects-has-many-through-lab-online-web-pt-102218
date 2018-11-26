@@ -2,33 +2,28 @@ class Genre
   
   attr_accessor :name
   
-  @@all_genres = []
+  @@all = []
   
   def initialize(name)
     @name = name
-    @@all_genres << self
+    @@all << self
   end
-  
+    
   def self.all
-    @@all_genres
+    @@all 
   end
-  
+    
   def songs
-    array = []
-    Song.all.each do |song|
-      if song.genre.name == self.name
-        array << song
-      end
+    Song.all.select do |song|
+      song.genre = self
     end
-    array
   end
   
   def artists
-    array = []
-    Song.all.each do |artist|
-      array << artist.artist
+    songs.map do |song|
+      song.artist
     end
-  array
-end
-
+  end
+    
+    
 end
