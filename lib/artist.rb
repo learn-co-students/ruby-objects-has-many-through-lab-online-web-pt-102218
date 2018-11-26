@@ -11,17 +11,26 @@ class Artist
     @@all_artists << self
   end
   
-  def new_song(song, genre)
-    creation = Song.new(song, name, genre.name)
-    Song.all << creation
+  def new_song(name, genre)
+    #binding.pry
+    Song.new(name, self, genre)
+  end
+  
+  def songs
+    Song.all.select do |song|
+      if song.artist.name == self.name
+        song.artist.name
+      end
+    end
   end
   
   def genres
-    @@all_artists << Genre.all
-  end
-
-  def songs
-    @@all_artists << Song.all
+    Genre.all.map do |genre|
+      if genre.name == "rap"
+        binding.pry
+        genre
+      end
+    end
   end
   
    def self.all

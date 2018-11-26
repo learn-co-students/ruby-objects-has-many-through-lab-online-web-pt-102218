@@ -16,7 +16,7 @@ class Genre
   def songs
     array = []
     Song.all.each do |song|
-      if song.genre == self.name
+      if song.genre.name == self.name
         array << song
       end
     end
@@ -24,7 +24,12 @@ class Genre
   end
   
   def artists
-   Artist.all
+    array = []
+    Artist.all.each do |creator|
+      if creator.name == song.artist
+        array << artist
+      end
+    end
+    array
   end
-  
 end
