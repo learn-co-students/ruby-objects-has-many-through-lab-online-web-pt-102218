@@ -12,31 +12,21 @@ class Artist
   end
   
   def new_song(name, genre)
-    #binding.pry
     Song.new(name, self, genre)
   end
   
   def songs
     Song.all.select do |song|
-      if song.artist.name == self.name
-        song.artist.name
-      end
+      song.artist == self
     end
   end
   
-  def genres
-    Genre.all.map do |genre|
-      if genre.name == "rap"
-        binding.pry
-        genre
-      end
-    end
+ def genres
+    songs.map(&:genre)
   end
   
    def self.all
     @@all_artists
   end
-  
-  
   
 end
