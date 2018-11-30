@@ -25,4 +25,10 @@ def new_song(name, genre)
   Song.new(name, self, genre)
 end
 
+def genres
+  Song.all.collect do |song|
+    song.genre
+  end
+end
+
 end
