@@ -1,8 +1,16 @@
+require "pry"
+
 class Artist
 
   attr_accessor :name
 
   @@all = []
+
+  def songs
+    Song.all.select do |song|
+      song.artist == self
+    end
+  end
 
   def initialize(name)
     @name = name
@@ -13,5 +21,8 @@ class Artist
     @@all
   end
 
+def new_song(name, genre)
+  Song.new(name, self, genre)
+end
 
 end
